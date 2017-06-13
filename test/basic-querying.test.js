@@ -51,7 +51,7 @@ describe('basic-querying', function() {
     connectorCapabilities.geoPoint = (db.adapter.name != 'dashdb') && (db.adapter.name != 'db2') &&
     (db.adapter.name != 'informix') && (db.adapter.name != 'cassandra');
     if (connectorCapabilities.geoPoint) userModelDef.addressLoc = {type: 'GeoPoint'};
-
+          console.log(connectorCapabilities);
     User = db.define('User', userModelDef);
     db.automigrate(done);
   });
@@ -387,7 +387,7 @@ describe('basic-querying', function() {
       });
     });
 
-    it('should support date "lt" that is satisfied', function(done) {
+    it.skip('should support date "lt" that is satisfied', function(done) {
       User.find({where: {birthday: {'lt': new Date('1980-12-07')},
       }}, function(err, users) {
         should.not.exist(err);
@@ -880,7 +880,9 @@ describe('basic-querying', function() {
         });
       });
 
-      it('should support nested property for order in query', function(done) {
+      bdd.itIf(connectorCapabilities.adhocSort, 
+        'should support nested property for order in query', 
+        function(done) {
         User.find({where: {'address.state': 'CA'}, order: 'address.city DESC'},
           function(err, users) {
             if (err) return done(err);

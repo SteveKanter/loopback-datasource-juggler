@@ -33,17 +33,8 @@ if (!('getModelBuilder' in global)) {
   };
 }
 
-// if (!('connectorCapabilities' in global)) {
-//   global.connectorCapabilities = {
-//   	nestedProperty: true,
-//   };
-// }
-
-global.connectorCapabilities = {
-  ilike: false,
-  nilike: false,
-  nestedProperty: true,
-  adhocSort: false,
-  supportPagination: false,
-  ignoreUndefinedConditionValue: false,
-};
+if (!('connectorCapabilities' in global)) {
+  global.connectorCapabilities = {
+  	nestedProperty: true,
+  };
+}

@@ -5,5 +5,6 @@
 
 'use strict';
 
-// require('./basic-querying.test.js');
+require('./basic-querying.test.js');
 require('./include.test.js');
+require('./relations.test.js');

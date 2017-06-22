@@ -51,7 +51,6 @@ describe('basic-querying', function() {
     connectorCapabilities.geoPoint = (db.adapter.name != 'dashdb') && (db.adapter.name != 'db2') &&
     (db.adapter.name != 'informix') && (db.adapter.name != 'cassandra');
     if (connectorCapabilities.geoPoint) userModelDef.addressLoc = {type: 'GeoPoint'};
-          console.log(connectorCapabilities);
     User = db.define('User', userModelDef);
     db.automigrate(done);
   });
@@ -880,10 +879,10 @@ describe('basic-querying', function() {
         });
       });
 
-      bdd.itIf(connectorCapabilities.adhocSort, 
-        'should support nested property for order in query', 
+      bdd.itIf(connectorCapabilities.adhocSort,
+        'should support nested property for order in query',
         function(done) {
-        User.find({where: {'address.state': 'CA'}, order: 'address.city DESC'},
+          User.find({where: {'address.state': 'CA'}, order: 'address.city DESC'},
           function(err, users) {
             if (err) return done(err);
             users.length.should.be.equal(2);
@@ -891,7 +890,7 @@ describe('basic-querying', function() {
             users[1].address.city.should.be.eql('San Jose');
             done();
           });
-      });
+        });
 
       it('should support multi-level nested array property in query', function(done) {
         User.find({where: {'address.tags.tag': 'business'}}, function(err, users) {

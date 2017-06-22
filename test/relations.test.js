@@ -408,7 +408,7 @@ describe('relations', function() {
         }
       });
 
-      it.only('should update scoped record with promises', function(done) {
+      it('should update scoped record with promises', function(done) {
         var id;
         Book.create()
         .then(function(book) {
